@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CapsLockViewer — Privacy Policy</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font: 16px/1.55 -apple-system, "Segoe UI", system-ui, sans-serif; max-width: 42rem; margin: 4rem auto; padding: 0 1.5rem; }
+    h1 { margin-bottom: 0.25rem; }
+    p.sub { color: #666; margin-top: 0; }
+    h2 { margin-top: 2rem; }
+    code { background: #f4f4f4; padding: 0.1em 0.35em; border-radius: 3px; font-size: 0.92em; }
+    @media (prefers-color-scheme: dark) { code { background: #222; } p.sub { color: #999; } }
+  </style>
+</head>
+<body>
+  <h1>Privacy Policy</h1>
+  <p class="sub">CapsLockViewer — last updated <time>2026-05-13</time></p>
+
+  <h2>The short version</h2>
+  <p>CapsLockViewer doesn't collect, store, transmit, or share any data. It has no network access.</p>
+
+  <h2>What it actually does</h2>
+  <p>The app reads the state of one keyboard key — <strong>Caps Lock</strong> — using the standard Windows API <code>GetKeyState</code>. It does not log, record, or transmit your keystrokes. It does not run a keylogger or hook the keyboard.</p>
+
+  <h2>Local data stored on your machine</h2>
+  <ul>
+    <li><strong>One registry value</strong> (unpackaged build only): <code>HKCU\Software\Microsoft\Windows\CurrentVersion\Run\CapsLockViewer</code> — points at the exe so Windows can launch it at sign-in.</li>
+    <li><strong>Two settings keys</strong>: <code>FirstRunCompleted</code> and <code>HideWhenOff</code>, stored in <code>HKCU\Software\CapsLockViewer</code> (unpackaged) or <code>ApplicationData.LocalSettings</code> (Microsoft Store install).</li>
+  </ul>
+  <p>That's the full extent of it. Removing the app removes all of the above.</p>
+
+  <h2>Third parties</h2>
+  <p>None. There are no analytics, telemetry, ads, crash reporters, or external services of any kind.</p>
+
+  <h2>Source code</h2>
+  <p>The app is open source — every line of behavior described above can be audited at <a href="https://github.com/RemielDev/CapsLockViewer">github.com/RemielDev/CapsLockViewer</a>.</p>
+
+  <h2>Contact</h2>
+  <p>Questions? Open an issue on GitHub or email <a href="mailto:remielshirazi@gmail.com">remielshirazi@gmail.com</a>.</p>
+</body>
+</html>
