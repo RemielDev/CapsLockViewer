@@ -1,70 +1,71 @@
-# CapsLockViewer
+# capslockviewer
 
-A tiny Caps Lock indicator for the Windows system tray. Uses ~10 MB of RAM.
+a tiny caps lock indicator that sits in your windows system tray. cyan "A" when caps is on, white outline when it's off. uses about 10 mb of ram.
+
+i built this because every other caps lock app i found was weirdly heavy — traystatus eats ~197 mb to show one keyboard bit. this does the same thing in ~10.
 
 ![ON state](preview/on-128.png) ![OFF state](preview/off-128.png)
 
-## Run from source
+made by remiel shirazi. mit licensed, source is all here.
 
-Requires [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0).
+## run it from source
+
+needs the [.net 8 sdk](https://dotnet.microsoft.com/download/dotnet/8.0).
 
 ```powershell
 dotnet run --project CapsLockViewer.csproj -c Release
 ```
 
-## Build standalone exe
+## build a standalone exe
 
 ```powershell
 dotnet publish CapsLockViewer.csproj -c Release
 ```
 
-Output: `bin/Release/net8.0-windows10.0.19041.0/win-x64/publish/CapsLockViewer.exe` (self-contained, ~74 MB, no .NET runtime required on the target machine).
+drops a self-contained exe at `bin/Release/net8.0-windows10.0.19041.0/win-x64/publish/CapsLockViewer.exe` (~74 mb, no runtime needed on the target machine).
 
-## Build MSIX (for Microsoft Store / sideload)
+## build the msix (store / sideload)
 
-Requires [Visual Studio 2022](https://visualstudio.microsoft.com/) (Community is fine) or [VS Build Tools 2022](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022) with the **Windows Application Packaging** workload.
+needs [visual studio 2022](https://visualstudio.microsoft.com/) or the build tools with the **windows application packaging** workload.
 
 ```powershell
 msbuild Package\CapsLockViewer.Package.wapproj /p:Configuration=Release /p:Platform=x64 /restore
 ```
 
-Output: `Package/AppPackages/CapsLockViewer.Package_1.0.0.0_x64.msixbundle`.
+output lands at `Package/AppPackages/CapsLockViewer.Package_1.0.0.0_x64.msixbundle`.
 
-For Store submission, replace `Identity Name` and `Publisher` in `Package/Package.appxmanifest` with the values from your Partner Center reservation.
+before submitting to the store, swap `Identity Name` and `Publisher` in `Package/Package.appxmanifest` for the values from your partner center reservation, then rebuild.
 
-## Regenerate icon previews / Store tiles
+## regenerate the icons / store tiles
 
 ```powershell
 dotnet run --project CapsLockViewer.csproj -c Release -- --export-preview preview
 dotnet run --project CapsLockViewer.csproj -c Release -- --export-store-assets Package\Assets
 ```
 
-## How it works
+## how it actually works
 
-- Single `Program.cs` — `TrayContext` (ApplicationContext + NotifyIcon) and `IconFactory` (renders multi-resolution ICOs in memory).
-- Caps Lock state polled via `user32!GetKeyState(VK_CAPITAL)` on a 150 ms `WinForms.Timer`.
-- Single-instance enforced by a named `Mutex`.
-- Auto-start uses `windows.startupTask` when packaged (MSIX) and `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` when run as a plain exe. `Program.IsPackaged` decides at startup.
-- Settings stored in `ApplicationData.Current.LocalSettings` (packaged) or `HKCU\Software\CapsLockViewer` (unpackaged).
-- `psapi!EmptyWorkingSet` is called after launch and periodically to keep the working set near 10 MB.
+- one file — `Program.cs`. `TrayContext` runs the tray icon, `IconFactory` draws the icons in memory.
+- caps state is polled with `user32!GetKeyState(VK_CAPITAL)` on a 150 ms timer. no keyboard hook.
+- only one copy runs at a time (named mutex). extra launches just exit.
+- auto-start uses the msix `startupTask` when packaged, or `HKCU\...\Run` when it's a plain exe.
+- settings live in `LocalSettings` (packaged) or `HKCU\Software\CapsLockViewer` (unpackaged).
+- calls `EmptyWorkingSet` now and then to keep memory down near 10 mb.
 
-## Project layout
+## layout
 
 ```
-CapsLockViewer.csproj             standalone .NET 8 WinForms project
-Program.cs                        all source
+CapsLockViewer.csproj             the .net 8 winforms project
+Program.cs                        all the code
 app.manifest                      win32 manifest (asInvoker, longPathAware)
-Package/
-  CapsLockViewer.Package.wapproj  MSIX packaging project (referenced by VS / msbuild)
-  Package.appxmanifest            MSIX manifest, declares the startupTask
-  Assets/                         Store tile PNGs (regenerated from source)
-preview/                          tray icon PNGs for the README
+Package/                          msix packaging project + store tiles
+preview/                          tray icon pngs for this readme
 ```
 
-## Contributing
+## contributing
 
-PRs welcome. Keep it tiny — the whole app fits in one source file and that's the bar. Open an issue first for anything beyond a bug fix.
+keep it small. the whole thing is one source file and i'd like it to stay that way. open an issue before anything bigger than a bug fix.
 
-## License
+## license
 
-MIT. See [LICENSE](LICENSE).
+mit — see [LICENSE](LICENSE). © 2026 remiel shirazi.
