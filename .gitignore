@@ -16,3 +16,7 @@ BundleArtifacts/
 *.cer
 release-*/
 *.zip
+
+# internal submission notes (kept local, not for public repo)
+docs/NEXT-STEPS.md
+docs/store-listing.md
