@@ -11,16 +11,25 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-0e0f14?style=for-the-badge&labelColor=0e0f14&color=22d3ee" /></a>
-  <img alt="Windows" src="https://img.shields.io/badge/Windows%2010%2F11-0e0f14?style=for-the-badge&labelColor=0e0f14&color=0891b2" />
+  <a href="https://www.microsoft.com/store/apps/9PCKD6P3KSD1"><img alt="Get it from Microsoft" src="https://img.shields.io/badge/Get%20it%20from%20Microsoft-Free-0e0f14?style=for-the-badge&logo=microsoft&logoColor=22d3ee&labelColor=0e0f14&color=22d3ee" /></a>
+  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-0e0f14?style=for-the-badge&labelColor=0e0f14&color=10b981" /></a>
   <img alt=".NET 8" src="https://img.shields.io/badge/.NET%208-0e0f14?style=for-the-badge&labelColor=0e0f14&color=512bd4" />
 </p>
 
 <p align="center">
+  <img alt="Windows" src="https://img.shields.io/badge/Windows%2010%2F11-1c1f26?style=flat-square&logo=windows" />
   <img alt="WinForms" src="https://img.shields.io/badge/WinForms-1c1f26?style=flat-square" />
   <img alt="~10 MB RAM" src="https://img.shields.io/badge/~10%20MB%20RAM-1c1f26?style=flat-square&color=22d3ee" />
   <img alt="Single file" src="https://img.shields.io/badge/single%20source%20file-1c1f26?style=flat-square" />
 </p>
+
+---
+
+## Install
+
+The easiest way: grab it from the **[Microsoft Store](https://www.microsoft.com/store/apps/9PCKD6P3KSD1)** in one click. Auto-updates, sandboxed, no SmartScreen warnings.
+
+If you'd rather build from source or ship your own MSIX, see the build sections below.
 
 ---
 
